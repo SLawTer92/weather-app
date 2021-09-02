@@ -3,12 +3,13 @@ let apiKey = "2c98ed9360d60319e8f6c81d7d8203bf";
 let url = "https://api.openweathermap.org/data/2.5/weather?"
 let tempElement = document.querySelector("#current-temp");
 let currentCity = document.querySelector("#current-city");
+let userInput = "" //set in Getcity()
 
 function getCity(event) {
   event.preventDefault();
   let searchBar = document.querySelector("#search-bar");
   userInput = searchBar.value;
-  currentCity.innerHTML = `${userInput().toUpperCase()}`;
+  currentCity.innerHTML = `${userInput.toUpperCase()}`;
 
   axios.get(`${url}q=${userInput}&units=metric&appid=${apiKey}&`).then(getTemp);
 }
