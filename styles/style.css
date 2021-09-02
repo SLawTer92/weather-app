@@ -2,7 +2,8 @@
 .content-box {
     display: block;
     margin: auto;
-    margin-top: 25px;
+    margin-top: 18px;
+    margin-bottom: 5px;
     width: 475px;
     border: 3px solid #5AC2F0;
     border-radius: 5px;
@@ -113,4 +114,17 @@ p {
 
 .day-temp {
     font-size: large;
+}
+
+#footer {
+    text-align: center;
+    font-size: x-small;
+    color: rgb(136, 135, 135);
+}
+
+#gitHub-link {
+    display: block;
+    margin: auto;
+    text-decoration: none;
+    font-size: small;
 }
