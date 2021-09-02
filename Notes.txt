@@ -1,0 +1,5 @@
+//Place under h2
+        <span>
+          <a href="#" class="celsius" id="celsius">°C</a> | 
+          <a href="#" class="fahrenheit" id="fahrenheit">°F</a>
+        </span>

@@ -1,0 +1,116 @@
+
+.content-box {
+    display: block;
+    margin: auto;
+    margin-top: 25px;
+    width: 475px;
+    border: 3px solid #5AC2F0;
+    border-radius: 5px;
+    background-color: #EBF7FD;
+    text-align: center;
+    box-shadow: 2px 3px 8px rgb(214, 214, 214); 
+}
+
+.search-bar {
+    display: block;
+    margin: auto;
+    padding: 12px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    width: 325px;
+    background-color: rgba(241, 241, 241, 0.678);
+    border: 3px solid rgb(139, 139, 139);
+    box-shadow: 1px 1px 15px rgb(214, 214, 214);  
+}
+
+.search-bar:hover {
+    background-color: #fff;
+    box-shadow: 4px 5px 10px rgb(214, 214, 214);
+    width: 365px;  
+    transition: ease-in-out 100ms;
+}
+
+.search-btn {
+    display: block;
+    margin: auto;
+    margin-bottom: 7px;
+    padding: 5px;
+    background-color: #5ac3f0b4;
+    border: 2px solid #31568a;
+    width: 125px;
+    color: #31568a;
+    font-size: larger;  
+    box-shadow: 2px 3px 8px rgb(214, 214, 214);
+}
+
+.search-btn:hover {
+    background-color: #a4e0fac9;
+    box-shadow: 5px 6px 8px rgb(214, 214, 214);
+    transition: ease-in-out 100ms;
+}
+
+#current-button {
+    display: block;
+    margin: auto;
+    margin-bottom: 50px;
+    padding: 2px;
+    background-color: #4eda5ab4;
+    border: 2px solid #29723b;
+    width: 80px;
+    color: #29723b;
+    font-size: medium;  
+    box-shadow: 2px 3px 8px rgb(214, 214, 214);
+}
+
+#current-button:hover {
+    background-color: #76f581b4;
+    box-shadow: 5px 6px 8px rgb(214, 214, 214);
+    transition: ease-in-out 100ms;
+}
+
+.today-temp, .week-temps {
+    color: #576A84;
+}
+
+.icon-main, .icon-weekday {
+    color: #5AC2F0;
+    margin-bottom: 10px;
+}
+
+.current-city {
+    font-weight: bold; 
+    margin-bottom: 10px; 
+}
+
+.day-time {
+    font-weight: lighter;
+}
+
+.icon-main {
+    font-size: 80px;
+}
+
+.current-temp, .day-temp {
+    font-weight: normal;
+}
+
+.celsius, .fahrenheit {
+    text-decoration: none;
+}
+
+.week-temps {
+    margin: 40px 20px 35px 20px;
+}
+
+.day {
+    font-size: x-large;
+    font-weight: normal;
+}
+
+p {
+    margin-bottom: 0px;
+}
+
+.day-temp {
+    font-size: large;
+}
