@@ -48,7 +48,7 @@ currentBtn.addEventListener("click", getPosition);
 // Display todays date
 let now = new Date();
 
-let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let day = days[now.getDay()];
 
 let hour = now.getHours()
