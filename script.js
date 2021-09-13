@@ -1,9 +1,10 @@
 // Get city input from search bar and get city temp
 let apiKey = "2c98ed9360d60319e8f6c81d7d8203bf";
 let url = "https://api.openweathermap.org/data/2.5/weather?"
-let tempElement = document.querySelector("#current-temp");
+let currentTemp = document.querySelector("#current-temp");
 let currentCity = document.querySelector("#current-city");
-let userInput = "" //set in Getcity()
+let userInput = null; //set in Getcity()
+let celsiusTemp = null; //set in getTemp() or getLocationTemp()
 
 function getCity(event) {
   event.preventDefault();
@@ -15,14 +16,18 @@ function getCity(event) {
 }
 
 function getTemp(response) {
-  let temp = Math.round(response.data.main.temp);
-  tempElement.innerHTML = `${temp}°C `;
+  let celsiusTemp = Math.round(response.data.main.temp);
+  currentTemp.innerHTML = `${celsiusTemp}°C `;
 }
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", getCity);
 
 //get geolocation and get location temp
+
+function getCurrentPosition(){
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
 
 function getPosition(event){
   event.preventDefault();
@@ -37,14 +42,37 @@ function showPosition(position) {
 }
 
 function getLocationTemp(response) {
-  let temp = Math.round(response.data.main.temp);
+  let celsiusTemp = Math.round(response.data.main.temp);
   currentCity.innerHTML = `${response.data.name}`
-  tempElement.innerHTML = `${temp}°C`;
+  currentTemp.innerHTML = `${celsiusTemp}°C`;
 }
 
 let currentBtn = document.querySelector("#current-button");
 currentBtn.addEventListener("click", getPosition);
 
+
+
+// Convert celsius to fahrenheit
+function convertToFahrenheit(event) {
+  event.preventDefault();
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemp = (celsiusTemp * 9/5) + 32
+  alert(fahrenheitTemp);
+}
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  alert(celsiusTemp);
+}
+
+let fahrenheitLink = document.querySelector ("#fahrenheit-link");
+fahrenheitLink.addEventListener ("click", convertToFahrenheit);
+
+let celsiusLink = document.querySelector ("#celsius-link");
+celsiusLink.addEventListener ("click", convertToCelsius);
 
 // Display todays date
 let now = new Date();
@@ -57,6 +85,10 @@ let minutes = now.getMinutes() <10 ?`0${now.getMinutes()}`: now.getMinutes()
 
 let showDayTime = document.querySelector("#day-time");
 showDayTime.innerHTML = `${day} ${hour}:${minutes}`;
+
+
+// set current location
+getCurrentPosition();
 
 /*convert celsius to fahrenheit?
 function toFahrenheit(event) {
