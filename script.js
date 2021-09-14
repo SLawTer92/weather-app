@@ -1,10 +1,15 @@
-// Get city input from search bar and get city temp
 let apiKey = "2c98ed9360d60319e8f6c81d7d8203bf";
 let url = "https://api.openweathermap.org/data/2.5/weather?"
 let currentTemp = document.querySelector("#current-temp");
 let currentCity = document.querySelector("#current-city");
-let userInput = null; //set in Getcity()
-let celsiusTemp = null; //set in getTemp() or getLocationTemp()
+let userInput = undefined; //set in Getcity()
+let celsiusTemp = 0; //set in getTemp() or getLocationTemp()
+let fahrenheitTemp = (celsiusTemp * 9/5) + 32
+
+// Get city input from search bar and get city temp
+
+
+
 
 function getCity(event) {
   event.preventDefault();
@@ -16,8 +21,8 @@ function getCity(event) {
 }
 
 function getTemp(response) {
-  let celsiusTemp = Math.round(response.data.main.temp);
-  currentTemp.innerHTML = `${celsiusTemp}°C `;
+  celsiusTemp = Math.round(response.data.main.temp);
+  currentTemp.innerHTML = `${celsiusTemp}°`;
 }
 
 let searchForm = document.querySelector("#search-form");
@@ -42,30 +47,28 @@ function showPosition(position) {
 }
 
 function getLocationTemp(response) {
-  let celsiusTemp = Math.round(response.data.main.temp);
+  celsiusTemp = Math.round(response.data.main.temp);
   currentCity.innerHTML = `${response.data.name}`
-  currentTemp.innerHTML = `${celsiusTemp}°C`;
+  currentTemp.innerHTML = `${celsiusTemp}°`;
 }
 
 let currentBtn = document.querySelector("#current-button");
 currentBtn.addEventListener("click", getPosition);
 
-
-
 // Convert celsius to fahrenheit
+
 function convertToFahrenheit(event) {
   event.preventDefault();
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
-  let fahrenheitTemp = (celsiusTemp * 9/5) + 32
-  alert(fahrenheitTemp);
+  currentTemp.innerHTML = `${fahrenheitTemp}°`;
 }
 
 function convertToCelsius(event) {
   event.preventDefault();
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
-  alert(celsiusTemp);
+  currentTemp.innerHTML = `${celsiusTemp}°`;
 }
 
 let fahrenheitLink = document.querySelector ("#fahrenheit-link");
@@ -87,25 +90,8 @@ let showDayTime = document.querySelector("#day-time");
 showDayTime.innerHTML = `${day} ${hour}:${minutes}`;
 
 
-// set current location
-getCurrentPosition();
+// Set initial city temp
+axios.get(`${url}q=manchester&units=metric&appid=${apiKey}&`).then(getTemp);
 
-/*convert celsius to fahrenheit?
-function toFahrenheit(event) {
-  event.preventDefault();
-  let temp = document.querySelector("#current-temp");
-  temp.innerHTML = 66;
-}
 
-function toCelsius(event) {
-  event.preventDefault();
-  let temp = document.querySelector("#current-temp");
-  temp.innerHTML = 19;
-}
-
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", toFahrenheit);
-
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", toCelsius); */
 

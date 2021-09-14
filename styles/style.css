@@ -53,7 +53,7 @@
 #current-button {
     display: block;
     margin: auto;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     padding: 2px;
     background-color: #4eda5ab4;
     border: 2px solid #29723b;
@@ -91,24 +91,34 @@
     font-size: 80px;
 }
 
-#current-temp, .day-temp {
+#current-temp {
     font-weight: normal;
+    font-size: 300%;
+    margin-bottom: 20px;
+}
+
+#degree-links {
+    font-size: large;
+    border: solid 1px #576A84;
+    border-radius: 50px;
+    padding: 5px;
+    
 }
 
 #celsius-link, #fahrenheit-link {
     text-decoration: none;
 }
 
-#today-temp .active {
+.active {
     color: #576A84;
 }
 
-#today-temp .active:hover {
+.active:hover {
     cursor: default;
 }
 
 .week-temps {
-    margin: 40px 20px 35px 20px;
+    margin: 25px 20px 35px 20px;
 }
 
 .day {
