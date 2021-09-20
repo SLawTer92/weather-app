@@ -1,17 +1,24 @@
 let apiKey = "2c98ed9360d60319e8f6c81d7d8203bf";
 let url = "https://api.openweathermap.org/data/2.5/weather?"
+
 let currentTemp = document.querySelector("#current-temp");
 let currentCity = document.querySelector("#current-city");
 let userInput = undefined; //set in Getcity()
 let celsiusTemp = 0; //set in getTemp() or getLocationTemp()
 let fahrenheitTemp = (celsiusTemp * 9/5) + 32
 
-// Set initial city temp
+function getForecast(coordinates) {
+  let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}}`;
+  console.log(forecastUrl);
+}
 
 function getTemp(response) {
   celsiusTemp = Math.round(response.data.main.temp);
   currentTemp.innerHTML = `${celsiusTemp}°`;
+  getForecast(response.data.coord);
 }
+
+// Set initial city temp
 
 axios.get(`${url}q=manchester&units=metric&appid=${apiKey}&`).then(getTemp);
 
@@ -29,7 +36,7 @@ function getCity(event) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", getCity);
 
-//get geolocation and get location temp
+// Get geolocation and location temp from "Current" button
 
 function getCurrentPosition(){
   navigator.geolocation.getCurrentPosition(showPosition);
