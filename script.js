@@ -6,10 +6,16 @@ let userInput = undefined; //set in Getcity()
 let celsiusTemp = 0; //set in getTemp() or getLocationTemp()
 let fahrenheitTemp = (celsiusTemp * 9/5) + 32
 
-// Get city input from search bar and get city temp
+// Set initial city temp
 
+function getTemp(response) {
+  celsiusTemp = Math.round(response.data.main.temp);
+  currentTemp.innerHTML = `${celsiusTemp}°`;
+}
 
+axios.get(`${url}q=manchester&units=metric&appid=${apiKey}&`).then(getTemp);
 
+// Get city then temp from search bar input
 
 function getCity(event) {
   event.preventDefault();
@@ -18,11 +24,6 @@ function getCity(event) {
   currentCity.innerHTML = `${userInput.toUpperCase()}`;
 
   axios.get(`${url}q=${userInput}&units=metric&appid=${apiKey}&`).then(getTemp);
-}
-
-function getTemp(response) {
-  celsiusTemp = Math.round(response.data.main.temp);
-  currentTemp.innerHTML = `${celsiusTemp}°`;
 }
 
 let searchForm = document.querySelector("#search-form");
@@ -90,8 +91,6 @@ let showDayTime = document.querySelector("#day-time");
 showDayTime.innerHTML = `${day} ${hour}:${minutes}`;
 
 
-// Set initial city temp
-axios.get(`${url}q=manchester&units=metric&appid=${apiKey}&`).then(getTemp);
 
 
 
