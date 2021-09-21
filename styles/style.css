@@ -69,7 +69,7 @@
     transition: ease-in-out 100ms;
 }
 
-#today-temp, .week-temps {
+#today-temp, .forecast {
     color: #576A84;
 }
 
@@ -116,7 +116,7 @@
     cursor: default;
 }
 
-.week-temps {
+.forecast {
     margin: 25px 20px 30px 20px;
 }
 

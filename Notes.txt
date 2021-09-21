@@ -1,5 +1,37 @@
-//Place under h2
-        <span>
-          <a href="#" class="celsius" id="celsius">°C</a> | 
-          <a href="#" class="fahrenheit" id="fahrenheit">°F</a>
+
+
+https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}}
+
+To do:
+-retrieve icons from api
+-add "element" to html (document.queryselector) variable names
+-if statement on minutes <10
+-current button click- add css active change to celsius
+-incorrect city spelling input handling
+
+
+        <span class="day col-2">
+          <p>Sat</p>
+          <i class="icon-weekday fas fa-cloud-sun"></i>
+          <p  class="day-temp">14°C</p>
+        </span>
+        <span class="day col-2">
+          <p>Sun</p>
+          <i class="icon-weekday fas fa-sun"></i>
+          <p  class="day-temp">18°C</p>
+        </span>
+        <span class="day col-2">
+          <p>Mon</p>
+          <i class="icon-weekday fas fa-cloud-sun-rain"></i>
+          <p  class="day-temp">10°C</p>
+        </span>
+        <span class="day col-2">
+          <p>Tue</p>
+          <i class="icon-weekday fas fa-cloud-showers-heavy"></i>
+          <p  class="day-temp">9°C</p>
+        </span>
+        <span class="day col-2">
+          <p>Wed</p>
+          <i class="icon-weekday fas fa-cloud"></i>
+          <p class="day-temp">8°C</p>
         </span>

@@ -85,6 +85,26 @@ fahrenheitLink.addEventListener ("click", convertToFahrenheit);
 let celsiusLink = document.querySelector ("#celsius-link");
 celsiusLink.addEventListener ("click", convertToCelsius);
 
+// Display forecast HTML
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = "";
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+
+  days.forEach(function (day) {
+  forecastHTML = forecastHTML + 
+  `<span class="day col-2">
+    <p>${day}</p>
+      <i class="icon-weekday far fa-snowflake"></i>
+    <p class="day-temp">-3°C</p>
+  </span>`;
+});
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
 // Display todays date
 let now = new Date();
 
@@ -98,6 +118,6 @@ let showDayTime = document.querySelector("#day-time");
 showDayTime.innerHTML = `${day} ${hour}:${minutes}`;
 
 
-
+displayForecast();
 
 
