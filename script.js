@@ -8,14 +8,20 @@ let celsiusTemp = 0; //set in getTemp() or getLocationTemp()
 let fahrenheitTemp = (celsiusTemp * 9/5) + 32
 
 function getForecast(coordinates) {
-  let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}}`;
-  console.log(forecastUrl);
+  let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
+  axios.get(forecastUrl).then(displayForecast);
 }
 
 function getTemp(response) {
   celsiusTemp = Math.round(response.data.main.temp);
   currentTemp.innerHTML = `${celsiusTemp}°`;
   getForecast(response.data.coord);
+}
+
+function getLocationTemp(response) {
+  celsiusTemp = Math.round(response.data.main.temp);
+  currentCity.innerHTML = `${response.data.name}`
+  currentTemp.innerHTML = `${celsiusTemp}°`;
 }
 
 // Set initial city temp
@@ -54,14 +60,43 @@ function showPosition(position) {
   axios.get(`${url}lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`).then(getLocationTemp);
 }
 
-function getLocationTemp(response) {
-  celsiusTemp = Math.round(response.data.main.temp);
-  currentCity.innerHTML = `${response.data.name}`
-  currentTemp.innerHTML = `${celsiusTemp}°`;
-}
+
 
 let currentBtn = document.querySelector("#current-button");
 currentBtn.addEventListener("click", getPosition);
+
+// Display forecast HTML
+
+function formatDay(dt) {
+  let date = new Date(dt * 1000);
+  let day = date.getDay();
+  let forecastDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return forecastDays[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  console.log(response.data.daily);
+
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = "";
+  
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML = forecastHTML + 
+        `<span class="day col-2">
+           <p>${formatDay(forecastDay.dt)}</p>
+           <i class="icon-weekday far fa-snowflake"></i>
+           <p class="day-temp">${Math.round(forecastDay.temp.day)}°</p>
+         </span>`;
+    }
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
 
 // Convert celsius to fahrenheit
 
@@ -85,26 +120,6 @@ fahrenheitLink.addEventListener ("click", convertToFahrenheit);
 let celsiusLink = document.querySelector ("#celsius-link");
 celsiusLink.addEventListener ("click", convertToCelsius);
 
-// Display forecast HTML
-
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
-
-  let forecastHTML = "";
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
-
-  days.forEach(function (day) {
-  forecastHTML = forecastHTML + 
-  `<span class="day col-2">
-    <p>${day}</p>
-      <i class="icon-weekday far fa-snowflake"></i>
-    <p class="day-temp">-3°C</p>
-  </span>`;
-});
-
-  forecastElement.innerHTML = forecastHTML;
-}
-
 // Display todays date
 let now = new Date();
 
@@ -116,8 +131,5 @@ let minutes = now.getMinutes() <10 ?`0${now.getMinutes()}`: now.getMinutes()
 
 let showDayTime = document.querySelector("#day-time");
 showDayTime.innerHTML = `${day} ${hour}:${minutes}`;
-
-
-displayForecast();
 
 
