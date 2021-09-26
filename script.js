@@ -1,27 +1,29 @@
 let apiKey = "2c98ed9360d60319e8f6c81d7d8203bf";
 let url = "https://api.openweathermap.org/data/2.5/weather?"
+let forecastUrl = "https://api.openweathermap.org/data/2.5/onecall?"
 
-let currentTemp = document.querySelector("#current-temp");
-let currentCity = document.querySelector("#current-city");
+let tempElement = document.querySelector("#current-temp");
+let cityElement = document.querySelector("#current-city");
+let iconElement = document.querySelector("#icon-main");
 let userInput = undefined; //set in Getcity()
 let celsiusTemp = 0; //set in getTemp() or getLocationTemp()
 //let fahrenheitTemp = (celsiusTemp * 9/5) + 32
 
 function getForecast(coordinates) {
-  let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
-  axios.get(forecastUrl).then(displayForecast);
+  axios.get(`${forecastUrl}lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`).then(displayForecast);
 }
 
 function getTemp(response) {
   celsiusTemp = Math.round(response.data.main.temp);
-  currentTemp.innerHTML = `${celsiusTemp}°`;
+  tempElement.innerHTML = `${celsiusTemp}°`;
   getForecast(response.data.coord);
 }
 
 function getLocationTemp(response) {
   celsiusTemp = Math.round(response.data.main.temp);
-  currentCity.innerHTML = `${response.data.name}`
-  currentTemp.innerHTML = `${celsiusTemp}°`;
+  cityElement.innerHTML = `${response.data.name}`
+  tempElement.innerHTML = `${celsiusTemp}°`;
+  //iconElement.setAttribute();
 }
 
 // Set initial city temp
@@ -34,7 +36,7 @@ function getCity(event) {
   event.preventDefault();
   let searchBar = document.querySelector("#search-bar");
   userInput = searchBar.value;
-  currentCity.innerHTML = `${userInput.toUpperCase()}`;
+  cityElement.innerHTML = `${userInput.toUpperCase()}`;
 
   axios.get(`${url}q=${userInput}&units=metric&appid=${apiKey}&`).then(getTemp);
 }
@@ -43,10 +45,6 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", getCity);
 
 // Get geolocation and location temp from "Current" button
-
-function getCurrentPosition(){
-  navigator.geolocation.getCurrentPosition(showPosition);
-}
 
 function getPosition(event){
   event.preventDefault();
@@ -58,6 +56,7 @@ function showPosition(position) {
   let lon = position.coords.longitude;
   
   axios.get(`${url}lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`).then(getLocationTemp);
+  axios.get(`${forecastUrl}lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`).then(displayForecast);
 }
 
 let currentBtn = document.querySelector("#current-button");
@@ -87,7 +86,6 @@ function displayForecast(response) {
       forecastHTML = forecastHTML + 
         `<span class="day col-2">
            <p>${formatDay(forecastDay.dt)}</p>
-           <i class="icon-weekday far fa-snowflake"></i>
            <p class="day-temp">${Math.round(forecastDay.temp.day)}°</p>
          </span>`;
     }
@@ -95,28 +93,6 @@ function displayForecast(response) {
 
   forecastElement.innerHTML = forecastHTML;
 }
-
-/* Convert celsius to fahrenheit
-
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  currentTemp.innerHTML = `${fahrenheitTemp}°`;
-}
-
-function convertToCelsius(event) {
-  event.preventDefault();
-  fahrenheitLink.classList.remove("active");
-  celsiusLink.classList.add("active");
-  currentTemp.innerHTML = `${celsiusTemp}°`;
-}
-
-let fahrenheitLink = document.querySelector ("#fahrenheit-link");
-fahrenheitLink.addEventListener ("click", convertToFahrenheit);
-
-let celsiusLink = document.querySelector ("#celsius-link");
-celsiusLink.addEventListener ("click", convertToCelsius); */
 
 // Display todays date
 let now = new Date();
@@ -127,7 +103,27 @@ let day = days[now.getDay()];
 let hour = now.getHours()
 let minutes = now.getMinutes() <10 ?`0${now.getMinutes()}`: now.getMinutes()
 
-let showDayTime = document.querySelector("#day-time");
-showDayTime.innerHTML = `${day} ${hour}:${minutes}`;
+let dayTimeElement = document.querySelector("#day-time");
+dayTimeElement.innerHTML = `${day} ${hour}:${minutes}`;
 
+/* Convert celsius to fahrenheit
 
+function convertToFahrenheit(event) {
+  event.preventDefault();
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  tempElement.innerHTML = `${fahrenheitTemp}°`;
+}
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  tempElement.innerHTML = `${celsiusTemp}°`;
+}
+
+let fahrenheitLink = document.querySelector ("#fahrenheit-link");
+fahrenheitLink.addEventListener ("click", convertToFahrenheit);
+
+let celsiusLink = document.querySelector ("#celsius-link");
+celsiusLink.addEventListener ("click", convertToCelsius); */
