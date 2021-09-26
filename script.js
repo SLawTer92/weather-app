@@ -5,7 +5,7 @@ let currentTemp = document.querySelector("#current-temp");
 let currentCity = document.querySelector("#current-city");
 let userInput = undefined; //set in Getcity()
 let celsiusTemp = 0; //set in getTemp() or getLocationTemp()
-let fahrenheitTemp = (celsiusTemp * 9/5) + 32
+//let fahrenheitTemp = (celsiusTemp * 9/5) + 32
 
 function getForecast(coordinates) {
   let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
@@ -60,8 +60,6 @@ function showPosition(position) {
   axios.get(`${url}lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`).then(getLocationTemp);
 }
 
-
-
 let currentBtn = document.querySelector("#current-button");
 currentBtn.addEventListener("click", getPosition);
 
@@ -98,7 +96,7 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-// Convert celsius to fahrenheit
+/* Convert celsius to fahrenheit
 
 function convertToFahrenheit(event) {
   event.preventDefault();
@@ -118,7 +116,7 @@ let fahrenheitLink = document.querySelector ("#fahrenheit-link");
 fahrenheitLink.addEventListener ("click", convertToFahrenheit);
 
 let celsiusLink = document.querySelector ("#celsius-link");
-celsiusLink.addEventListener ("click", convertToCelsius);
+celsiusLink.addEventListener ("click", convertToCelsius); */
 
 // Display todays date
 let now = new Date();
