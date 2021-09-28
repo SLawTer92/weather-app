@@ -2,12 +2,12 @@
 .content-box {
     display: block;
     margin: auto;
-    margin-top: 8px;
+    margin-top: 15px;
     margin-bottom: 2px;
     width: 475px;
-    border: 3px solid #5AC2F0;
+    border: 3px solid #576A84;
     border-radius: 5px;
-    background-color: #EBF7FD;
+    background-color: #fff;
     text-align: center;
     box-shadow: 2px 3px 8px rgb(214, 214, 214); 
 }
@@ -19,7 +19,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     width: 325px;
-    background-color: rgba(241, 241, 241, 0.678);
+    background-color: rgb(255, 255, 255);
     border: 3px solid rgb(139, 139, 139);
     box-shadow: 1px 1px 15px rgb(214, 214, 214);  
 }
@@ -36,7 +36,7 @@
     margin: auto;
     margin-bottom: 7px;
     padding: 5px;
-    background-color: #5ac3f0b4;
+    background-color: #5ac3f073;
     border: 2px solid #31568a;
     width: 125px;
     color: #31568a;
@@ -55,7 +55,7 @@
     margin: auto;
     margin-bottom: 40px;
     padding: 2px;
-    background-color: #4eda5ab4;
+    background-color: #4eda5a81;
     border: 2px solid #29723b;
     width: 80px;
     color: #29723b;
@@ -73,11 +73,6 @@
     color: #576A84;
 }
 
-.icon-main, .icon-weekday {
-    color: #5AC2F0;
-    margin-bottom: 10px;
-}
-
 #current-city {
     font-weight: bold; 
     margin-bottom: 10px; 
@@ -87,33 +82,10 @@
     font-weight: lighter;
 }
 
-.icon-main {
-    font-size: 80px;
-}
-
 #current-temp {
     font-weight: normal;
     font-size: 300%;
     margin-bottom: 20px;
-}
-
-#degree-links {
-    font-size: large;
-    border: solid 1px #576A84;
-    border-radius: 50px;
-    padding: 5px 10px;
-}
-
-#celsius-link, #fahrenheit-link {
-    text-decoration: none;
-}
-
-.active {
-    color: #576A84;
-}
-
-.active:hover {
-    cursor: default;
 }
 
 .forecast {

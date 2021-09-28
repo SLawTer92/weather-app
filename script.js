@@ -7,23 +7,26 @@ let cityElement = document.querySelector("#current-city");
 let iconElement = document.querySelector("#icon-main");
 let userInput = undefined; //set in Getcity()
 let celsiusTemp = 0; //set in getTemp() or getLocationTemp()
-//let fahrenheitTemp = (celsiusTemp * 9/5) + 32
-
-function getForecast(coordinates) {
-  axios.get(`${forecastUrl}lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`).then(displayForecast);
-}
 
 function getTemp(response) {
   celsiusTemp = Math.round(response.data.main.temp);
   tempElement.innerHTML = `${celsiusTemp}°`;
   getForecast(response.data.coord);
+  iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+}
+
+function getForecast(coordinates) {
+  axios.get(`${forecastUrl}lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`).then(displayForecast);
 }
 
 function getLocationTemp(response) {
   celsiusTemp = Math.round(response.data.main.temp);
   cityElement.innerHTML = `${response.data.name}`
   tempElement.innerHTML = `${celsiusTemp}°`;
-  //iconElement.setAttribute();
+
+  iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 // Set initial city temp
@@ -105,25 +108,3 @@ let minutes = now.getMinutes() <10 ?`0${now.getMinutes()}`: now.getMinutes()
 
 let dayTimeElement = document.querySelector("#day-time");
 dayTimeElement.innerHTML = `${day} ${hour}:${minutes}`;
-
-/* Convert celsius to fahrenheit
-
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  tempElement.innerHTML = `${fahrenheitTemp}°`;
-}
-
-function convertToCelsius(event) {
-  event.preventDefault();
-  fahrenheitLink.classList.remove("active");
-  celsiusLink.classList.add("active");
-  tempElement.innerHTML = `${celsiusTemp}°`;
-}
-
-let fahrenheitLink = document.querySelector ("#fahrenheit-link");
-fahrenheitLink.addEventListener ("click", convertToFahrenheit);
-
-let celsiusLink = document.querySelector ("#celsius-link");
-celsiusLink.addEventListener ("click", convertToCelsius); */
